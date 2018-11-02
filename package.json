@@ -1,0 +1,12 @@
+{
+  "name": "github-get-pull-request",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": "cli.js",
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@octokit/rest": "^15.9.4"
+  }
+}
