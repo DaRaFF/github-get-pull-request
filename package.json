@@ -1,5 +1,5 @@
 {
-  "name": "github-get-pull-request",
+  "name": "@daraff/github-get-pull-request",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
