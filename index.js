@@ -1,52 +1,31 @@
 require('./assert.js')
+const _ = require('lodash')
 const Octokit = require('./octokit')
+
+// assert.js assures that this environment variables are set
+const token = process.env.GH_TOKEN
+const owner = process.env.GH_OWNER
+const repo = process.env.GH_REPO
+const sha = process.env.GH_SHA
 
 // main application
 module.exports = async () => {
-  return 77
-  // let state = 'success'
-  // const o = new OctokitHelper(token)
-  // const js = await json(req)
-  // const {repository, sha} = js
-  //
-  // if (!isValidRepository(repository, res)) return
-  // if (!isValidSha(sha, res)) return
-  //
-  // const pullRequests = await o.searchPullRequest({repository, sha})
-  //   .catch((e) => {
-  //     return send(res, 400, e)
-  //   })
-  // const pullRequestNumber = _.get(pullRequests, 'data.items[0].number', false)
-  //
-  // if (!pullRequestNumber) {
-  //   return send(res, 401, `no pull request found with commit ${sha} `)
-  // }
-  //
-  // const pr = await o.getPullRequest({repository, number: pullRequestNumber})
-  //   .catch((e) => {
-  //     return send(res, 400, e)
-  //   })
-  //
-  // const baseBranchName = pr.data.base.ref
-  //
-  // if (isReleaseBranch(baseBranchName)) {
-  //   const prComments = await o.getPullRequestCommits({repository, number: pullRequestNumber})
-  //     .catch((e) => {
-  //       return send(res, 400, e)
-  //     })
-  //   const commits = _.map(prComments.data, (c) => c.commit)
-  //
-  //   const type = await conventionalCommits(commitConfig, {commits})
-  //   console.log('type', type)
-  //
-  //   if (type !== 'patch') {
-  //     state = 'error'
-  //   }
-  // }
-  //
-  // await o.createStatus({repository, sha, state})
-  //   .catch((e) => {
-  //     return send(res, 400, `failed to update github check on pr ${pr.data.html_url} `)
-  //   })
-  // return send(res, 200, `github check updated on pr ${pr.data.html_url} `)
+  const o = new Octokit(token)
+  const pullRequests = await o.searchPullRequest({owner, repo, sha})
+    .catch((e) => {
+      return e
+    })
+
+  const pullRequestNumber = _.get(pullRequests, 'data.items[0].number', false)
+
+  if (!pullRequestNumber) {
+    return new Error(`no pull request found with commit ${sha} `)
+  }
+
+  const pr = await o.getPullRequest({repo, owner, number: pullRequestNumber})
+    .catch((e) => {
+      return e
+    })
+
+  return pr
 }
