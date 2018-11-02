@@ -3,7 +3,9 @@
   "version": "0.0.0-development",
   "description": "",
   "main": "index.js",
-  "bin": "cli.js",
+  "bin": {
+    "github-get-pull-request": "cli.js"
+  },
   "author": "",
   "license": "MIT",
   "dependencies": {
@@ -16,11 +18,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/DaRaFF/github-get-pull-request.git"
+    "url": "git+https://github.com/DaRaFF/github-get-pull-request.git"
   },
   "devDependencies": {
     "semantic-release": "^15.10.6",
     "travis-deploy-once": "^5.0.9"
   },
-  "private": false
+  "publishConfig": {
+    "access": "public"
+  },
+  "bugs": {
+    "url": "https://github.com/DaRaFF/github-get-pull-request/issues"
+  },
+  "homepage": "https://github.com/DaRaFF/github-get-pull-request#readme"
 }
