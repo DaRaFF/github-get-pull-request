@@ -17,7 +17,7 @@ npx github-get-pull-request --token=<your-token> --owner=<gh-owner> --repo=<gh-r
 
 // index.js
 const githubGetPullRequest = require('@daraff/github-get-pull-request')
-const pr = await githubGetPullRequest()
+const pr = await githubGetPullRequest({token, owner, repo, sha})
   .catch((err) => {
     console.log('this is an error', err)
   })
