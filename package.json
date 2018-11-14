@@ -3,14 +3,13 @@
   "version": "0.0.0-development",
   "description": "",
   "main": "index.js",
-  "bin": {
-    "github-get-pull-request": "cli.js"
-  },
-  "author": "",
+  "bin": "./cli.js",
+  "author": "Ralph Meier",
   "license": "MIT",
   "dependencies": {
+    "@octokit/rest": "^15.9.4",
     "lodash": "^4.17.4",
-    "@octokit/rest": "^15.9.4"
+    "yargs": "^12.0.2"
   },
   "scripts": {
     "semantic-release": "semantic-release",

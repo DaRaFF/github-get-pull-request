@@ -3,10 +3,12 @@ const octokit = require('@octokit/rest')()
 module.exports = class Octokit {
 
   constructor (token) {
-    octokit.authenticate({
-      type: 'oauth',
-      token: token
-    })
+    if (token) {
+      octokit.authenticate({
+        type: 'oauth',
+        token: token
+      })
+    }
   }
 
   async getPullRequest ({owner, repo, number}) {
