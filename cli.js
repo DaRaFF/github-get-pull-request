@@ -8,4 +8,4 @@ const run = require('./index')
 const {token, owner, repo, sha} = argv
 
 run({token, owner, repo, sha})
-  .then(console.log)
+  .then((pr) => console.log(JSON.stringify(pr)))
